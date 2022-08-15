@@ -1,8 +1,8 @@
 n = int(input())
-
-hive = 1  
 cnt = 1
-while n > hive:
-    hive += 6 * cnt
-    cnt += 1  
-print(cnt)
+for i in range(0, 1000000001):
+    cnt += (6*i)
+
+    if cnt >= n:
+        print(i+1)
+        break
