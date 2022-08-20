@@ -7,7 +7,4 @@ while n > 0:
 
 print(m)
 # LCM(Least Common Multiple)
-if n and m != 0:
-    print(a*b/n*m)
-else:
-    print(a*b//m)
+print(a*b//m)
