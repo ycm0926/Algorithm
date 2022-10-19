@@ -6,7 +6,7 @@ while 1:
         break
 
     for i in words:
-        if i == '[' or i == '(':  # [ or [ 입력시 스택 추가
+        if i == '[' or i == '(':  # [ or ( 입력시 스택 추가
             stack.append(i)
         elif i == ']':
             if stack and stack[-1] == '[':
