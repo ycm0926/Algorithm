@@ -1,9 +1,13 @@
 import sys
 
 array = []
+
 for _ in range(int(input())):
-    array.append(int(sys.stdin.readline()))
-    if array[-1] == 0:
-        array.pop()
-        array.pop()
+    i = int(sys.stdin.readline())
+    
+    if i == 0:
+        array.pop()  
+    else:
+        array.append(i)
+
 print(sum(array))
