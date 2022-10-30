@@ -13,10 +13,10 @@ for i in range(len(b)):
         continue
     for j in range(len(a)):
         if j == where_a and j == len(a)-1:
-            print(b[i], end='\n')
+            print(b[i])
         elif j == where_a:
             print(b[i], end='')
         elif j == len(a)-1:
-            print('.', end='\n')
+            print('.')
         else:
             print('.', end='')
