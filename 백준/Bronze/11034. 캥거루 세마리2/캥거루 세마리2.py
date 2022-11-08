@@ -1,5 +1,3 @@
-import sys
-input = sys.stdin.readline
 while 1:
     try:
         a, b, c = map(int, input().split())
