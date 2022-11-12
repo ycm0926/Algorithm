@@ -1,10 +1,10 @@
 import sys
 
-arr = [list(map(int, sys.stdin.readline().split())) for _ in range(int(input()))]
-for i in range(len(arr)):
+pig = []
+pig = [list(map(int, input().split())) for _ in range(int(input()))]
+for i in range(len(pig)):
     cnt = 1
-    for j in range(len(arr)):
-        if arr[i][0] < arr[j][0] and arr[i][1] < arr[j][1]:
+    for j in range(len(pig)):
+        if pig[i][0] < pig[j][0] and pig[i][1] < pig[j][1]:
             cnt += 1
     print(cnt, end=' ')
-    
