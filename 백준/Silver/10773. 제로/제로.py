@@ -1,10 +1,7 @@
 import sys
-input = sys.stdin.readline
+input()
+input = sys.stdin
 m = []
-for _ in range(int(input())):
-    k = int(input())
-    if k == 0:
-        m.pop()
-    else:
-        m.append(k)
+for i in map(int, input):
+    m.append(i) if i != 0 else m.pop()
 print(sum(m))
