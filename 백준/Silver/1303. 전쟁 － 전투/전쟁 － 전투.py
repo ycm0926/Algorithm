@@ -5,7 +5,6 @@ graph_w = [list(input()) for _ in range(n)]
 graph_b = copy.deepcopy(graph_w)
 cnt_w = cnt_b = 0
 sm_w = sm_b = 0
-lst = []
 
 dx = [1, 0, -1, 0]
 dy = [0, -1, 0, 1]
@@ -24,7 +23,7 @@ def dfs_w(x,y):
             ny = y + dy[i]
             dfs_w(nx,ny)
 
-def dfs_b(x, y):
+def dfs_b(x,y):
     global cnt_w, cnt_b
 
     if x < 0 or x >= n or y < 0 or y >= m:
