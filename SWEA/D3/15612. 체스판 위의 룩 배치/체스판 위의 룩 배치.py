@@ -26,3 +26,22 @@ for tc in range(1,int(input())+1):
             print(f'#{tc} yes')
         else:
             print(f'#{tc} no')
+            
+'''
+T = int(input())
+
+for test_case in range(1, T + 1):
+    col = [0 for i in range(8)]
+    state = 0
+    sum = 0
+    for i in range(8):
+        st = input()
+        if st.count('O') == 1:
+            if col[st.index('O')] == 0:
+                col[st.index('O')] = 1
+
+    if col.count(1) == 8:
+        print(f'#{test_case} yes')
+    else:
+        print(f'#{test_case} no')
+'''
