@@ -9,7 +9,7 @@ def solution(n):
 '''
 # 다른사람 풀이
 
-def solution(number):
+def solution(n):
     return sum(map(int,str(number)))
 
 TIL/회고
