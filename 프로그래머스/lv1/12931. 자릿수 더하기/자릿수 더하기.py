@@ -9,11 +9,8 @@ def solution(n):
 '''
 # 다른사람 풀이
 
-def sum_digit(number):
+def solution(number):
     return sum(map(int,str(number)))
-
-# 아래는 테스트로 출력해 보기 위한 코드입니다.
-print("결과 : {}".format(sum_digit(123)));
 
 TIL/회고
 - 한줄이면 ez하게 풀리는 문제
