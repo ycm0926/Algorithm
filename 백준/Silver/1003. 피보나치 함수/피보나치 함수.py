@@ -11,9 +11,7 @@ input = sys.stdin.readline
 
 for _ in range(int(input())):
     n = int(input())
-    dp = [] * n
-    dp.append([1, 0])
-    dp.append([0, 1])
+    dp = [[1, 0], [0, 1]]
     if n < 2:
         print(*dp[n])
     else:
