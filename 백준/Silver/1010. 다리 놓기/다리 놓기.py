@@ -1,6 +1,8 @@
 # 나의 풀이 (python3 112ms)
 from math import factorial
+import sys
 
+input = sys.stdin.readline
 for i in range(int(input())):
     w, s = map(int, input().split())
     print(factorial(s)//(factorial(s-w)*factorial(w))) # sCw 조합 구현
