@@ -12,12 +12,13 @@ def solution(s):
 
     li = ''.join(li)
     return int(li)
+
+'''
 # 다른사람 풀이
 def solution(str):
     a = int(str)
     return a
 
-'''
 TIL/회고
 
 - int리스트는 join 불가하다.
