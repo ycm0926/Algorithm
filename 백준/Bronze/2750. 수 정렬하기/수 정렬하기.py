@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 a = []
 for i in range(int(input())):
     a.append(int(input()))
