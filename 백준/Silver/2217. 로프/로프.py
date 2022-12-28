@@ -1,10 +1,12 @@
-n = int(input())
-max_res = 0
-ans = []
-for i in range(n):
-    ans.append(int(input()))
-ans.sort()
-for j in ans:
-    max_res = max(max_res, j*n)
-    n -= 1
-print(max_res)
+import sys
+input = sys.stdin.readline
+
+dummy = []
+for i in range(int(input())):
+    dummy.append(int(input()))
+res = 0
+dummy.sort(reverse=True)
+while dummy:
+    res = max(res,dummy[-1]*len(dummy))
+    dummy.pop()
+print(res)
