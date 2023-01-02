@@ -1,9 +1,11 @@
 import sys
-input = sys.stdin.readline
 
+input = sys.stdin.readline
 input()
 arr = list(map(int, input().split()))
-s = sorted(set(arr))
-dic = {s[i]:i for i in range(len(s))}
-for i in arr:
-    print(dic[i], end=' ')
+dic = {}
+for i,v in enumerate(sorted(set(arr))):
+    dic[v] = i
+for i in range(len(arr)):
+    arr[i] = dic[arr[i]]
+print(*arr)
