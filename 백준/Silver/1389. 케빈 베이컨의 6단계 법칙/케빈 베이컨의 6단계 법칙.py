@@ -1,5 +1,6 @@
 import sys
 from collections import deque
+input = sys.stdin.readline
 INF = int(1e9)                                                          # 무한을 의미하는 값으로 10억을 설정
 N, M = map(int,input().split())
 graph = [[INF]*(N+1) for i in range(N+1)]
