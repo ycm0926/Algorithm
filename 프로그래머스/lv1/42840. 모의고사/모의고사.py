@@ -30,7 +30,7 @@ def solution(answers):
 
     lis = [0,0,0]
     ans = []
-    for i in range(len(answers)):                                   # 수포자 각자 몇개 정답인지 카운트
+    for i in range(len(answers)):                                   # 수포자 각자 정답 개수 카운트
         if answers[i] == first[i]:
             lis[0] +=1
         if answers[i] == second[i]:
