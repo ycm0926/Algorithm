@@ -16,18 +16,17 @@ def solution(answers):
                 cnt = 1
 
     cnt = 3
-    for i in range(len(answers)):
-        third.append(cnt)
-        if len(third) % 2 == 0:
-            if cnt == 3 and third[-1] == third[-2]:
-                cnt = 1
-            elif cnt == 5 and third[-1] == third[-2]:
-                cnt = 3
-            else:
-                cnt += 1
+    for i in range(len(answers)):                                 
+        third.append(cnt)                                   
+        if len(third) % 2 == 0:                             
+            if cnt == 3 :                                   
+                cnt = 1                                    
+            elif cnt == 5:                                  
+                cnt = 3                                     
+            else:                                          
+                cnt += 1                                   
                 if third[-1] == 2:
                     cnt = 4
-
     lis = [0,0,0]
     ans = []
     for i in range(len(answers)):
