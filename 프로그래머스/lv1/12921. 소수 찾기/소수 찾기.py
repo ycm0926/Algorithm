@@ -1,7 +1,7 @@
 def solution(n):
     if n == 1:
         return n
-    res = []
+    res = 0
     for i in range(2,n+1):
         cnt = False
         for j in range(2,int(i**0.5)+1):
@@ -9,5 +9,5 @@ def solution(n):
                 cnt = True
                 break
         if cnt == False:
-            res.append(i)
-    return len(res)
+            res += 1
+    return res
