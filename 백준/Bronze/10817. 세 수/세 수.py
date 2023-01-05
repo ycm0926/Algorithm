@@ -1,3 +1,2 @@
-arr = list(map(int, input().split()))
-arr.sort()
-print(arr[1])
+import sys
+print(sorted(map(int,sys.stdin.readline().split()))[1])
