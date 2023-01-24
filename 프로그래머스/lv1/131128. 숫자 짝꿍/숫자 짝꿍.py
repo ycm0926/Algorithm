@@ -1,20 +1,13 @@
-from collections import Counter
-
 def solution(X, Y):
-    X = sorted(Counter(X).items(),reverse=True)
-    Y = sorted(Counter(Y).items(),reverse=True)
-    X_K = [i[0] for i in X]
-    Y_K = [i[0] for i in Y]
-    X_V = [i[1] for i in X]
-    Y_V = [i[1] for i in Y]
-    res = []
+    xList = list(X.count(str(x)) for x in range(10))
+    yList = list(Y.count(str(y)) for y in range(10))
+    answer = ""
+    for i in range(9, -1, -1):
+        answer += str(i) * min(xList[i], yList[i])
 
-    for i in X_K:
-        if i in Y_K:
-            res.append(i*min(X_V[X_K.index(i)],Y_V[Y_K.index(i)]))
-    if not res:
-        return '-1'
-    elif sum(map(int,res)) == 0:
-        return '0'
+    if answer == "":
+        return "-1"
+    elif answer[0] == "0" and answer[len(answer) - 1] == "0":
+        return "0"
     else:
-        return ''.join(res)
+        return answer
