@@ -1,67 +1,61 @@
+from collections import deque
+
+def findDist(startloc, end): #시작위치와 숫자을 주고 거리를 return 함
+    curr, curc = startloc # 현재 위치
+    curLoc = ((curr,curc,0))
+    queue = deque()
+    queue.append(curLoc)
+    while queue:
+        curr, curc, dist = queue.popleft()
+        if keypad[curr][curc] == end:
+            return ((curr,curc,dist))
+        for i in range(4):
+            nr, nc = curr + dr[i], curc + dc[i]
+            if 0 <= nr < 4 and 0 <= nc < 3:
+                curLoc = ((nr, nc, dist + 1))
+                queue.append(curLoc)
+
 def solution(numbers, hand):
-    col = [[1,4,7,'*'],[2,5,8,0],[3,6,9,'#']]
-    row = [[1,2,3],[4,5,6],[7,8,9],['*',0,'#']]
-    col_mid = [2,5,8,0]
-    if hand == "right":
-        hand = 'R'
-    if hand == "left":
-        hand = 'L'
     answer = ''
-    L_H = '*'
-    R_H = '#'
+    global keypad, dr, dc
 
-    for i in numbers:
+    dr, dc = (1,-1,0,0), (0,0, -1,1)
 
-        if L_H == i:
-            answer += 'L'
-        elif R_H == i:
-            answer += 'R'
-        elif i == 1 or i == 4 or i == 7:
-            answer += 'L'
-            L_H = i
-        elif i == 3 or i == 6 or i == 9:
-            answer += 'R'
-            R_H = i
+    keypad = [[0] * 3 for _ in range(4)] #키패드 생성
+    for r in range(3):
+        for c in range(3):
+            keypad[r][c] = 3 * r + c + 1
+    keypad[3][0] = -1 # 별을 의미
+    keypad[3][1] = 0
+    keypad[3][2] = -2 # #을 의미
+    leftloc, rightloc = (3,0), (3,2)
+    answer = []
+    for number in numbers: #숫자에 따라서 행동을 개시
+        if number == 1 or number == 4 or number == 7:
+            leftr,leftc,leftdist = findDist(leftloc, number)
+            leftloc = leftr, leftc
+            answer.append('L')
+        elif number == 3 or number == 6 or number == 9:
+            rightr, rightc, rightdist = findDist(rightloc, number)
+            rightloc = rightr, rightc
+            answer.append('R')
+             # 오른쪽 시작점에서 시작하여 숫자와의 거리 구함
         else:
-            for j in col:
-                if i in j:
-                    middle_cnt = j.index(i)
-                if L_H in j:
-                    L_cnt = j.index(L_H)
-                if R_H in j:
-                    R_cnt = j.index(R_H)
-
-            if L_H in col_mid and R_H not in col_mid:
-                for k in row:
-                    if L_H in k:
-                        if col_mid.index(i) > col_mid.index(L_H):
-                            L_cnt += 1
-                        else:
-                            L_cnt -= 1
-
-            if R_H in col_mid and L_H not in col_mid:
-                for k in row:
-                    if R_H in k:
-                        if col_mid.index(i) > col_mid.index(R_H):
-                            R_cnt += 1
-                        else:
-                            R_cnt -= 1
-
-            a = abs(middle_cnt-L_cnt)
-            b = abs(middle_cnt-R_cnt)
-
-            if a == b:
-                answer += hand
-                if hand == 'L':
-                    L_H = i
+            leftr, leftc, leftdist = findDist(leftloc, number)
+            rightr, rightc, rightdist = findDist(rightloc, number)
+            if leftdist > rightdist: #만약 왼쪽에서 출발하는게 dist가 더 크다면
+                answer.append('R')
+                rightloc = rightr, rightc
+            elif rightdist > leftdist:
+                leftloc = leftr, leftc
+                answer.append('L')
+            else:#만약에 같다면
+                if hand == "left":
+                    leftloc = leftr, leftc
+                    answer.append('L')
                 else:
-                    R_H = i
+                    answer.append('R')
+                    rightloc = rightr, rightc        
+    answer = ''.join(answer)
 
-            elif a > b:
-                answer += 'R'
-                R_H = i
-
-            else:
-                answer += 'L'
-                L_H = i
     return answer
