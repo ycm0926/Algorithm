@@ -1,61 +1,300 @@
-from collections import deque
-
-def findDist(startloc, end): #시작위치와 숫자을 주고 거리를 return 함
-    curr, curc = startloc # 현재 위치
-    curLoc = ((curr,curc,0))
-    queue = deque()
-    queue.append(curLoc)
-    while queue:
-        curr, curc, dist = queue.popleft()
-        if keypad[curr][curc] == end:
-            return ((curr,curc,dist))
-        for i in range(4):
-            nr, nc = curr + dr[i], curc + dc[i]
-            if 0 <= nr < 4 and 0 <= nc < 3:
-                curLoc = ((nr, nc, dist + 1))
-                queue.append(curLoc)
-
+# 나의 풀이
 def solution(numbers, hand):
     answer = ''
-    global keypad, dr, dc
+    l, r = 0, 0
+    l_mid, r_mid = False, False
 
-    dr, dc = (1,-1,0,0), (0,0, -1,1)
-
-    keypad = [[0] * 3 for _ in range(4)] #키패드 생성
-    for r in range(3):
-        for c in range(3):
-            keypad[r][c] = 3 * r + c + 1
-    keypad[3][0] = -1 # 별을 의미
-    keypad[3][1] = 0
-    keypad[3][2] = -2 # #을 의미
-    leftloc, rightloc = (3,0), (3,2)
-    answer = []
-    for number in numbers: #숫자에 따라서 행동을 개시
-        if number == 1 or number == 4 or number == 7:
-            leftr,leftc,leftdist = findDist(leftloc, number)
-            leftloc = leftr, leftc
-            answer.append('L')
-        elif number == 3 or number == 6 or number == 9:
-            rightr, rightc, rightdist = findDist(rightloc, number)
-            rightloc = rightr, rightc
-            answer.append('R')
-             # 오른쪽 시작점에서 시작하여 숫자와의 거리 구함
-        else:
-            leftr, leftc, leftdist = findDist(leftloc, number)
-            rightr, rightc, rightdist = findDist(rightloc, number)
-            if leftdist > rightdist: #만약 왼쪽에서 출발하는게 dist가 더 크다면
-                answer.append('R')
-                rightloc = rightr, rightc
-            elif rightdist > leftdist:
-                leftloc = leftr, leftc
-                answer.append('L')
-            else:#만약에 같다면
-                if hand == "left":
-                    leftloc = leftr, leftc
-                    answer.append('L')
+    for n in numbers:
+        if n == 1:
+            answer += 'L'
+            l = 3
+            l_mid = False
+        elif n == 4:
+            answer += 'L'
+            l = 2
+            l_mid = False
+        elif n == 7:
+            answer += 'L'
+            l = 1
+            l_mid = False       
+        elif n == 3:
+            answer += 'R'
+            r = 3
+            r_mid = False
+        elif n == 6:
+            answer += 'R'
+            r = 2
+            r_mid = False
+        elif n == 9:
+            answer += 'R'
+            r = 1
+            r_mid = False
+        elif n == 2:
+            if l_mid and r_mid:
+                if l == r:
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 3
+                    else:
+                        answer += 'L'
+                        l = 3
+                elif l > r:
+                    answer += 'L'
+                    l = 3
                 else:
-                    answer.append('R')
-                    rightloc = rightr, rightc        
-    answer = ''.join(answer)
+                    answer += 'R'
+                    r = 3
+            elif l_mid and not r_mid:
+                if abs(3 - l) == abs(3 - r) + 1:
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 3
+                        r_mid = True
+                    else:
+                        answer += 'L'
+                        l = 3
+                elif abs(3 - l) < abs(3 - r) + 1:
+                    answer += 'L'
+                    l = 3
+                else:
+                    answer += 'R'
+                    r = 3
+                    r_mid = True
+            elif not l_mid and r_mid:
+                if abs(3 - l) + 1 == abs(3 - r):
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 3
+                    else:
+                        answer += 'L'
+                        l = 3
+                        l_mid = True
+                elif abs(3 - l) + 1 > abs(3 - r):
+                    answer += 'R'
+                    r = 3
+                else:
+                    answer += 'L'
+                    l = 3
+                    l_mid = True
+            elif not l_mid and not r_mid:
+                if l == r:
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 3
+                        r_mid = True
+                    else:
+                        answer += 'L'
+                        l = 3
+                        l_mid = True
+                elif l > r:
+                    answer += 'L'
+                    l = 3
+                    l_mid = True
+                else:
+                    answer += 'R'
+                    r = 3
+                    r_mid = True
+        elif n == 5:
+            if l_mid and r_mid:
+                if abs(2 - l) == abs(2 - r):
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 2
+                    else:
+                        answer += 'L'
+                        l = 2
+                elif abs(2 - l) < abs(2 - r):
+                    answer += 'L'
+                    l = 2
+                else:
+                    answer += 'R'
+                    r = 2
+            elif l_mid and not r_mid:
+                if abs(2 - l) == abs(2 - r) + 1:
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 2
+                        r_mid = True
+                    else:
+                        answer += 'L'
+                        l = 2
+                elif abs(2 - l) < abs(2 - r) + 1:
+                    answer += 'L'
+                    l = 2
+                else:
+                    answer += 'R'
+                    r = 2
+                    r_mid = True
+            elif not l_mid and r_mid:
+                if abs(2 - l) + 1 == abs(2 - r):
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 2
+                    else:
+                        answer += 'L'
+                        l = 2
+                        l_mid = True
+                elif abs(2 - l) + 1 > abs(2 - r):
+                    answer += 'R'
+                    r = 2
+                else:
+                    answer += 'L'
+                    l = 2
+                    l_mid = True
+            elif not l_mid and not r_mid:
+                if abs(2 - l) == abs(2 - r):
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 2
+                        r_mid = True
+                    else:
+                        answer += 'L'
+                        l = 2
+                        l_mid = True
+                elif abs(2 - l) < abs(2 - r):
+                    answer += 'L'
+                    l = 2
+                    l_mid = True
+                else:
+                    answer += 'R'
+                    r = 2
+                    r_mid = True
+        elif n == 8:
+            if l_mid and r_mid:
+                if abs(1 - l) == abs(1 - r):
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 1
+                    else:
+                        answer += 'L'
+                        l = 1
+                elif abs(1 - l) < abs(1 - r):
+                    answer += 'L'
+                    l = 1
+                else:
+                    answer += 'R'
+                    r = 1
+            elif l_mid and not r_mid:
+                if abs(1 - l) == abs(1 - r) + 1:
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 1
+                        r_mid = True
+                    else:
+                        answer += 'L'
+                        l = 1
+                elif abs(1 - l) < abs(1 - r) + 1:
+                    answer += 'L'
+                    l = 1
+                else:
+                    answer += 'R'
+                    r = 1
+                    r_mid = True
+            elif not l_mid and r_mid:
+                if abs(1 - l) + 1 == abs(1 - r):
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 1
+                    else:
+                        answer += 'L'
+                        l = 1
+                        l_mid = True
+                elif abs(1 - l) + 1 > abs(1 - r):
+                    answer += 'R'
+                    r = 1
+                else:
+                    answer += 'L'
+                    l = 1
+                    l_mid = True
+            elif not l_mid and not r_mid:
+                if abs(1 - l) == abs(1 - r):
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 1
+                        r_mid = True
+                    else:
+                        answer += 'L'
+                        l = 1
+                        l_mid = True
+                elif abs(1 - l) < abs(1 - r):
+                    answer += 'L'
+                    l = 1
+                    l_mid = True
+                else:
+                    answer += 'R'
+                    r = 1
+                    r_mid = True
+        elif n == 0:
+            if l_mid and r_mid:
+                if l == r:
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 0
+                    else:
+                        answer += 'L'
+                        l = 0
+                elif l < r:
+                    answer += 'L'
+                    l = 0
+                else:
+                    answer += 'R'
+                    r = 0
+            elif l_mid and not r_mid:
+                if l == r + 1:
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 0
+                        r_mid = True
+                    else:
+                        answer += 'L'
+                        l = 0
+                elif l < r + 1:
+                    answer += 'L'
+                    l = 0
+                else:
+                    answer += 'R'
+                    r = 0
+                    r_mid = True
+            elif not l_mid and r_mid:
+                if l + 1 == r:
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 0
+                    else:
+                        answer += 'L'
+                        l = 0
+                        l_mid = True
+                elif l + 1 > r:
+                    answer += 'R'
+                    r = 0
+                else:
+                    answer += 'L'
+                    l = 0
+                    l_mid = True
+            elif not l_mid and not r_mid:
+                if l == r:
+                    if hand == 'right':
+                        answer += 'R'
+                        r = 0
+                        r_mid = True
+                    else:
+                        answer += 'L'
+                        l = 0
+                        l_mid = True
+                elif l < r:
+                    answer += 'L'
+                    l = 0
+                    l_mid = True
+                else:
+                    answer += 'R'
+                    r = 0
+                    r_mid = True
 
     return answer
+
+'''
+회고 / TIL
+- 노가다로 한 줄로 펼쳐서 풀었음.
+- 시간 효율성은 좋을 것 같음.
+- 작성하는 사람은 안 좋음. -> ㅋㅋㅋㅋㅋ
+'''
