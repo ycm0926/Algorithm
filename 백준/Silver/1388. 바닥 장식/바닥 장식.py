@@ -2,10 +2,6 @@ import sys
 
 input = sys.stdin.readline
 def dfs(x,y):
-    global cnt
-
-    if x < 0 or x >= N or y < 0 or y >= M:
-        return False
 
     visited[x][y] = True
 
