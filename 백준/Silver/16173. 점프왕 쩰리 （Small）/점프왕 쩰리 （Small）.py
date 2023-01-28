@@ -16,11 +16,11 @@ def bfs(x,y):
         ny = y + graph[x][y]
         if (nx == n - 1 and y == n - 1) or (x == n - 1 and ny == n - 1):        # 목표 지점 도착 시 출력
             return 'HaruHaru'
-        if 0 <= nx < n and 0 <= y < n:      # 오른쪽 이동
+        if 0 <= nx < n:                     # 오른쪽 이동 범위 확인
             if not visited[nx][y]:          # 방문하지 않았을 시 q에 추가
                 q.append((nx,y))
                 visited[nx][y] = True
-        if 0 <= ny < n and 0 <= x < n:      # 아래 이동
+        if 0 <= ny < n:                     # 아래 이동 범위 확인
             if not visited[x][ny]:          # 방문하지 않았을 시 q에 추가
                 q.append((x,ny))
                 visited[x][ny] = True
