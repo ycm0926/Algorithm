@@ -2,7 +2,7 @@ def solution(numbers, hand):
     col = [[1,4,7,'*'],[2,5,8,0],[3,6,9,'#']]
     row = [[1,2,3],[4,5,6],[7,8,9],['*',0,'#']]
     col_mid = [2,5,8,0]
-    if hand == "right":                                                      #
+    if hand == "right":                                                
         hand = 'R'
     if hand == "left":
         hand = 'L'
@@ -12,7 +12,7 @@ def solution(numbers, hand):
 
     for i in numbers:
         if L_H == i:                                                # 전과 같은 번호가 들어오는 경우
-            answer += 'L'
+            answer += 'L'           
         elif R_H == i:                                              # 전과 같은 번호가 들어오는 경우
             answer += 'R'
         elif i == 1 or i == 4 or i == 7:                            # 1, 4, 7이 들어오는 경우
