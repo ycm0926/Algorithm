@@ -10,7 +10,7 @@ def solution(n):
             if cnt == n:
                 answer += 1
                 break
-            if cnt >= n:
+            if cnt > n:
                 break
 
     return answer+1
