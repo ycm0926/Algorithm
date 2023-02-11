@@ -1,6 +1,3 @@
-import sys
-input = sys.stdin.readline
-
 _= input()
 ring = list(map(int,input().split()))
 b_ring = ring[0]
