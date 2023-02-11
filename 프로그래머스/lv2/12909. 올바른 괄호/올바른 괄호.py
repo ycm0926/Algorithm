@@ -1,11 +1,13 @@
 def solution(s):
-    answer = []
-    for i in range(len(s)):
-        answer.append(s[i])
-        if len(answer) >= 2 and answer[-1] == ')' and answer[-2] == '(':
-            del answer[-2:]
+    st = list()
+    for c in s:
+        if c == '(':            # '(' 는 추가
+            st.append(c)
 
-    if answer:
-        return False
-    else:
-        return True
+        if c == ')':            # ')' 라면 바로 pop
+            try:                # IndexError 발생 시 바로 False
+                st.pop()        
+            except IndexError:
+                return False
+
+    return len(st) == 0         # 비었다면 True 
