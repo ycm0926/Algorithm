@@ -1,7 +1,7 @@
 def solution(s):
-    answer = ''
-    s = s.lower().split(' ')
-    for i in range(len(s)):
-        answer += s[i][:1].upper() + s[i][1:] + ' '
+    jc = s.split(' ')
 
-    return answer[:-1]
+    for i in range(len(jc)):
+        jc[i] = jc[i].capitalize()
+
+    return ' '.join(jc)
