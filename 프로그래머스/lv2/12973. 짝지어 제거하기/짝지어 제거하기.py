@@ -1,9 +1,10 @@
 def solution(s):
-    answer = []
-    for i in s:
-        answer.append(i)
-        if len(answer) > 1 and answer[-1] == answer[-2]:
-            del answer[-2:]
+    answer = [s[0]]
+    for i in s[1:]:             
+        if answer and answer[-1] == i:
+            answer.pop()
+        else:
+            answer.append(i)
     if answer:
         return 0
     else:
