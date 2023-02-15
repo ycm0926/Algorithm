@@ -1,8 +1,7 @@
 def solution(n):
-    b = bin(n)[2:]
-    cnt = b.count('1')
+    n_cnt = bin(n)[2:].count('1')
     for i in range(n+1,1000001):
-        i_b = bin(i)[2:]
+        i_cnt = bin(i)[2:].count('1')
         
-        if i_b.count('1') == cnt:
+        if i_cnt == n_cnt:
             return i
