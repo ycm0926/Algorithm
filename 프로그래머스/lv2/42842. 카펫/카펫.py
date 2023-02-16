@@ -9,3 +9,4 @@ def solution(brown, yellow):
                 row, col = col, row
             
             return [col, row]
+        
