@@ -1,7 +1,8 @@
+import math
+
 def solution(n,a,b):
     answer = 0
-
-    # [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-    print('Hello Python')
-
+    while a != b:
+        a, b = math.ceil(a/2), math.ceil(b/2)
+        answer += 1
     return answer
