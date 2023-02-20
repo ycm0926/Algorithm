@@ -6,8 +6,7 @@ N, M = map(int,input().split())
 
 arr = []
 a = []
-for i in range(N):
-    arr.append(list(input().split()))
+arr = [list(input().split()) for i in range(N)]
 
 for i in range(N):
     for j in range(M):
