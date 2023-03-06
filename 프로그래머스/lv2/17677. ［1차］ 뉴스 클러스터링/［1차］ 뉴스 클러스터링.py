@@ -2,8 +2,7 @@ from math import floor
 def solution(str1, str2):
     str1, str2 = str1.upper(), str2.upper() # 문자열 전부 대문자로 변경
     l_str1, l_str2 = [], []                 # 두 글자씩 끊은 문자열 집합들
-    i_set, s_set = [], []                   # 다중교집합, 다중합집합 
-    i_cnt, s_cnt = 0, 0
+    i_cnt, s_cnt = 0, 0                     # 다중교집합, 다중합집합 
         
     for i in range(len(str1)):
         if str1[i:i+2].isalpha() and len(str1[i:i+2]) == 2:
