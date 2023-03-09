@@ -2,8 +2,10 @@ import sys
 input = sys.stdin.readline
 
 N, d, k, c = map(int, input().split())
-sushi = [int(input()) for i in range(N)]
+sushi = []
 answer = []
+for _ in range(N):
+    sushi.append(int(input()))
 
 for i in range(N):
     
