@@ -15,8 +15,7 @@ def solution(n, t, m, p):
             else:
                 nums += str(r)
                 
-        nums = nums[::-1]               # 진수 뒤집기
         num += 1                        # 숫자 증가
-        answer += nums
+        answer += nums[::-1] 
         
     return answer[p-1:t*m:m]
