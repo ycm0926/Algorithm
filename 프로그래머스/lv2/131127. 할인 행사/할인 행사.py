@@ -1,10 +1,10 @@
-import copy
+from copy import deepcopy as dc
 def solution(want, number, discount):
     answer = 0
     tmp = dict(zip(want,number))
     
     for i in range(len(discount)-9):
-        cnt = copy.copy(tmp)
+        cnt = dc(tmp)
         for j in discount[i:i+10]:
             if j in cnt:
                 cnt[j] -= 1
