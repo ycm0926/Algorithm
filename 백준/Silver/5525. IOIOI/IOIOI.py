@@ -1,12 +1,20 @@
 N = int(input())
 M = int(input())
-graph = list(input())
-tmp = 'IO'*N+'I'
-cnt = 2*N+1
-ans = 0
+S = input()
 
-# KMP 알고리즘
-for i in range(0,M-(2*N+1)+1):
-    if graph[i] == 'I' and graph[i+cnt-1] == 'I' and ''.join(graph[i:i+cnt]) == tmp:
-       ans += 1
+cursor, cnt, ans = 0, 0, 0
+
+# IOI라면 두칸씩 확인 시간 개선
+while cursor < M-2 :
+    if S[cursor:cursor+3] == "IOI" :
+        cursor +=2
+        cnt +=1
+        if cnt == N :
+          ans +=1
+          cnt -=1
+
+    else:    
+        cursor += 1
+        cnt = 0
+
 print(ans)
