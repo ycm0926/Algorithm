@@ -26,17 +26,17 @@ public class Main {
             }
         }
 
-        st = new StringTokenizer(br.readLine());
-        int K = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(br.readLine());
 
-        for(int v=0;v<K;v++) {
+        // 2차원 배열에서 구간합은 구하는 구간의 행-1 누적합과 열-1 누적합을 빼주고 중복으로 빼준 행-1,열-1 을 더해준다.
+        for(int i = 0; i < K; i++) {
             st = new StringTokenizer(br.readLine());
-            int i = Integer.parseInt(st.nextToken());
-            int j = Integer.parseInt(st.nextToken());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
             int x = Integer.parseInt(st.nextToken());
             int y = Integer.parseInt(st.nextToken());
 
-            int result = prefix_sum[x][y] - prefix_sum[x][j-1] - prefix_sum[i-1][y] + prefix_sum[i-1][j-1];
+            int result = prefix_sum[x][y] - prefix_sum[x][b-1] - prefix_sum[a-1][y] + prefix_sum[a-1][b-1];
             System.out.println(result);
         }
     }
