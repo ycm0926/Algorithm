@@ -42,18 +42,14 @@ class Solution
         int tc = sc.nextInt();
 
         for (int i = 1; i <= tc; i++) {
-            int[] numbers = new int[10];
+            int total = 0;
 
             for (int j = 0; j < 10; j++) {
-                numbers[j] = sc.nextInt();
+                total += sc.nextInt();
             }
 
-            // 스트림 평균 계산
-            double dAverage = Arrays.stream(numbers)
-                    .average()
-                    .orElse(0);
             // 형변환
-            int iAverage = (int) Math.round(dAverage);
+            int iAverage = (int) Math.round(total / 10.0);
 
             System.out.println("#" + i + " " + iAverage);
 
