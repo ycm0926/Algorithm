@@ -1,28 +1,26 @@
-from collections import deque
+def find_parent(parent, x):
+    if parent[x] != x:
+        parent[x] = find_parent(parent, parent[x])
+    return parent[x]
 
-def bfs(x,y,n,computers):
-    
-    q = deque([[x,y]])
-    computers[x][y] = 0
-    
-    while q:
-        x, y = q.popleft()
-        
-        for i in range(n):
-            if computers[y][i] == 1:
-                computers[y][i] = 0
-                q.append([y,i])
-
+def union_parent(parent, a, b):
+    a = find_parent(parent, a)
+    b = find_parent(parent, b)
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
 
 def solution(n, computers):
-    global answer
-    answer = 0
+    parent = [i for i in range(n)]
     
     for i in range(n):
-        for j in range(n):
+        for j in range(i+1, n):
             if computers[i][j] == 1:
-                bfs(i,j,n,computers)
-                
-                answer += 1
-
-    return answer
+                union_parent(parent, i, j)
+    
+    networks = set()
+    for i in range(n):
+        networks.add(find_parent(parent, i))
+    
+    return len(networks)
