@@ -6,16 +6,14 @@ for test_case in range(1, T + 1):
     a, b, c, d = map(int, input().split())
     tmp1, tmp2 = 0, 0
     for k,v in times.items():
-        if k == a:
+        if k < a:
+            tmp1 += v
+        elif k == a:
             tmp1 += b
-            break
-        tmp1 += v
 
-
-    for k, v in times.items():
-        if k == c:
+        if k < c:
+            tmp2 += v
+        elif k == c:
             tmp2 += d
-            break
-        tmp2 += v
-
+            
     print(f"#{test_case} {tmp2-tmp1+1}")
